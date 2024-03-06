@@ -1,15 +1,13 @@
 package com.vassilyev.submitapp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NonNull;
 import org.antlr.v4.runtime.misc.NotNull;
 
 @Entity
 @Data
+@Table(name = "user_account")
 public class User {
 
     @Id
@@ -18,7 +16,9 @@ public class User {
 
 
     @NonNull
+    @Column(unique = true)
     private String name;
+
 
 
 }
