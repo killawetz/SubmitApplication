@@ -1,0 +1,98 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004
+      author: Roman Vassilyev
+      changes:
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: name
+                  value: user
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: name
+                  value: operator
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: name
+                  value: admin
+        - insert:
+            tableName: user_account
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: name
+                  value: roman
+              - column:
+                  name: password
+                  value: 1234
+        - insert:
+            tableName: user_account
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: name
+                  value: john
+              - column:
+                  name: password
+                  value: qwerty
+        - insert:
+            tableName: user_account
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: name
+                  value: alice
+              - column:
+                  name: password
+                  value: 777
+        - insert:
+            tableName: user_role
+            columns:
+              - column:
+                  name: user_id
+                  value: 1
+              - column:
+                  name: role_id
+                  value: 3
+        - insert:
+            tableName: user_role
+            columns:
+              - column:
+                  name: user_id
+                  value: 2
+              - column:
+                  name: role_id
+                  value: 2
+        - insert:
+            tableName: user_role
+            columns:
+              - column:
+                  name: user_id
+                  value: 3
+              - column:
+                  name: role_id
+                  value: 1
+
+
+

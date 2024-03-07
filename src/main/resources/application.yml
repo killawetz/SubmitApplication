@@ -11,3 +11,7 @@ spring:
         ddl_auto: none
   liquibase:
     change-log: classpath:db/changelog/changelog-master.yml
+
+jwt:
+  secret: slowdive
+  expirationMs: 360000

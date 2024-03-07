@@ -1,0 +1,47 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003
+      author: Roman Vassilyev
+      changes:
+        - addColumn:
+            tableName: user_account
+            columns:
+              - column:
+                  name: password
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: user_role
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            tableName: user_role
+            columnNames: user_id, role_id
+        - addForeignKeyConstraint:
+            baseTableName: user_role
+            baseColumnNames: user_id
+            constraintName: USER_ID_FK_USER_ACCOUNT_CONSTRAINT
+            deferrable: false
+            initiallyDeferred: false
+            referencedTableName: user_account
+            referencedColumnNames: id
+        - addForeignKeyConstraint:
+            baseTableName: user_role
+            baseColumnNames: role_id
+            constraintName: ROLE_ID_FK_ROLE_CONSTRAINT
+            deferrable: false
+            initiallyDeferred: false
+            referencedTableName: role
+            referencedColumnNames: id
+
+
