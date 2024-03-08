@@ -39,6 +39,11 @@ databaseChangeLog:
                   type: bigint
                   constraints:
                     nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
         - createTable:
             tableName: status
             columns:
@@ -63,3 +68,11 @@ databaseChangeLog:
             initiallyDeferred: false
             referencedColumnNames: id
             referencedTableName: status
+        - addForeignKeyConstraint:
+            baseTableName: application
+            baseColumnNames: user_id
+            constraintName: USER_ID_FK_USER_CONSTRAINT
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id
+            referencedTableName: user_account

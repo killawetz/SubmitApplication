@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 007
+      id: 006
       author: Roman Vassilyev
       changes:
         - insert:
@@ -86,6 +86,10 @@ databaseChangeLog:
               - column:
                   name: status_id
                   value: 1
+              - column:
+                  name: user_id
+                  value: 4
+
         - insert:
             tableName: application
             columns:
@@ -107,6 +111,9 @@ databaseChangeLog:
               - column:
                   name: status_id
                   value: 2
+              - column:
+                  name: user_id
+                  value: 5
         - insert:
             tableName: application
             columns:
@@ -128,31 +135,6 @@ databaseChangeLog:
               - column:
                   name: status_id
                   value: 4
-# свяжем заявки с пользователями
-        - insert:
-            tableName: user_application
-            columns:
               - column:
                   name: user_id
-                  value: 4
-              - column:
-                  name: application_id
-                  value: 1
-        - insert:
-            tableName: user_application
-            columns:
-              - column:
-                  name: user_id
-                  value: 5
-              - column:
-                  name: application_id
-                  value: 2
-        - insert:
-            tableName: user_application
-            columns:
-              - column:
-                  name: user_id
-                  value: 3
-              - column:
-                  name: application_id
                   value: 3

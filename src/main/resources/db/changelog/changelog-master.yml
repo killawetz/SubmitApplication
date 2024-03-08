@@ -10,6 +10,4 @@ databaseChangeLog:
   - include:
       file: db/changelog/changeset/005-create-application-status-tables.yml
   - include:
-      file: db/changelog/changeset/006-link-user-application-tables.yml
-  #- include:
-   #   file: db/changelog/changeset/007-initial-data-application-commit.yml
+      file: db/changelog/changeset/006-initial-data-application-commit.yml
