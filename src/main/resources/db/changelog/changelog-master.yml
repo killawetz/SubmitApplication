@@ -7,3 +7,9 @@ databaseChangeLog:
       file: db/changelog/changeset/003-linking-role-user-tables.yml
   - include:
       file: db/changelog/changeset/004-initial-data-commit.yml
+  - include:
+      file: db/changelog/changeset/005-create-application-status-tables.yml
+  - include:
+      file: db/changelog/changeset/006-link-user-application-tables.yml
+  #- include:
+   #   file: db/changelog/changeset/007-initial-data-application-commit.yml

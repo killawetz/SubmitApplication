@@ -1,0 +1,158 @@
+databaseChangeLog:
+  - changeSet:
+      id: 007
+      author: Roman Vassilyev
+      changes:
+        - insert:
+            tableName: status
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: name
+                  value: draft
+        - insert:
+            tableName: status
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: name
+                  value: sent
+        - insert:
+            tableName: status
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: name
+                  value: accepted
+        - insert:
+            tableName: status
+            columns:
+              - column:
+                  name: id
+                  value: 4
+              - column:
+                  name: name
+                  value: rejected
+# добавим еще несколько людей с типом user в таблицу user_account
+        - insert:
+            tableName: user_account
+            columns:
+              - column:
+                  name: id
+                  value: 4
+              - column:
+                  name: name
+                  value: egor
+              - column:
+                  name: password
+                  value: password
+        - insert:
+            tableName: user_account
+            columns:
+              - column:
+                  name: id
+                  value: 5
+              - column:
+                  name: name
+                  value: icecube
+              - column:
+                  name: password
+                  value: goodday
+# добавление строк в таблицу с заявками
+        - insert:
+            tableName: application
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: title
+                  value: ne rabotaet computer
+              - column:
+                  name: text
+                  value: slomalsya computer i bolshe on ne rabotaet
+              - column:
+                  name: creation_time
+                  value: now()
+              - column:
+                  name: last_edit_time
+                  value: now()
+              - column:
+                  name: status_id
+                  value: 1
+        - insert:
+            tableName: application
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: title
+                  value: vse propalo
+              - column:
+                  name: text
+                  value: slovil deadlock i vse propalo chef
+              - column:
+                  name: creation_time
+                  value: now()
+              - column:
+                  name: last_edit_time
+                  value: now()
+              - column:
+                  name: status_id
+                  value: 2
+        - insert:
+            tableName: application
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: title
+                  value: pomogite
+              - column:
+                  name: text
+                  value: pomogite pomogite pomogite pomogite pomogite pomogite
+              - column:
+                  name: creation_time
+                  value: now()
+              - column:
+                  name: last_edit_time
+                  value: now()
+              - column:
+                  name: status_id
+                  value: 4
+# свяжем заявки с пользователями
+        - insert:
+            tableName: user_application
+            columns:
+              - column:
+                  name: user_id
+                  value: 4
+              - column:
+                  name: application_id
+                  value: 1
+        - insert:
+            tableName: user_application
+            columns:
+              - column:
+                  name: user_id
+                  value: 5
+              - column:
+                  name: application_id
+                  value: 2
+        - insert:
+            tableName: user_application
+            columns:
+              - column:
+                  name: user_id
+                  value: 3
+              - column:
+                  name: application_id
+                  value: 3

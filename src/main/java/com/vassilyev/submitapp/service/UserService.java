@@ -16,7 +16,7 @@ public class UserService {
 
 
     public User getByUsername(String username) {
-        return repository.findByUsername(username)
+        return repository.findByName(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Пользователь не найден"));
 
     }

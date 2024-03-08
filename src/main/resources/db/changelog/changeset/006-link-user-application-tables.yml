@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: 005
+      author: Roman Vassilyev
+      changes:
+        - createTable:
+            tableName: user_application
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: application_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+        - addPrimaryKey:
+            tableName: user_application
+            columnNames: user_id, application_id
+        - addForeignKeyConstraint:
+            baseTableName: user_application
+            baseColumnNames: user_id
+            constraintName: USER_APP_USER_ID_FK_USER_ACCOUNT_CONSTRAINT
+            deferrable: false
+            initiallyDeferred: false
+            referencedTableName: user_account
+            referencedColumnNames: id
+        - addForeignKeyConstraint:
+            baseTableName: user_application
+            baseColumnNames: application_id
+            constraintName: USER_APP_APPLICATION_ID_FK_APPLICATION_CONSTRAINT
+            deferrable: false
+            initiallyDeferred: false
+            referencedTableName: application
+            referencedColumnNames: id
