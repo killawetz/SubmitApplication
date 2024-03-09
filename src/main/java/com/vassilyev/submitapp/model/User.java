@@ -1,19 +1,25 @@
 package com.vassilyev.submitapp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NonNull;
+import lombok.*;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Data
 @Table(name = "user_account")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User implements UserDetails {
 
     @Id
@@ -22,30 +28,33 @@ public class User implements UserDetails {
 
 
     @NonNull
-    @Column(unique = true)
-    private String name;
+    @Column(unique = true, name = "name")
+    private String username;
 
     @NonNull
     @Column(unique = true)
     private String password;
 
-    @ManyToMany
-    private Set<Role> roles;
+    @JsonManagedReference
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", // Задаем кастомное имя для ассоциативной таблицы
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles;
+
+    @JsonManagedReference
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    private List<Application> application;
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles;
-    }
+        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return name;
+        for (Role role: roles) {
+            list.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
+        }
+        return list;
     }
 
     @Override

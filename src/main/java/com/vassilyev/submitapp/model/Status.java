@@ -1,10 +1,8 @@
 package com.vassilyev.submitapp.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Set;
 
@@ -13,8 +11,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "role")
-public class Role implements GrantedAuthority {
+public class Status {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,12 +22,7 @@ public class Role implements GrantedAuthority {
     private String name;
 
     @JsonBackReference
-    @ToString.Exclude
-    @ManyToMany(mappedBy = "roles")
-    Set<User> users;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "status")
+    private Set<Application> application;
 
-    @Override
-    public String getAuthority() {
-        return name;
-    }
 }

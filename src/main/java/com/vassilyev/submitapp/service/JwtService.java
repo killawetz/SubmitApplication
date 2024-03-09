@@ -31,12 +31,14 @@ public class JwtService {
         Map<String, Object> claims = new HashMap<>();
         if (userDetails instanceof User customUserDetails) {
             claims.put("id", customUserDetails.getId());
-            claims.put("name", customUserDetails.getName());
             claims.put("role", customUserDetails.getRoles());
         }
         return generateToken(claims, userDetails);
     }
 
+    public String extractAuthorities(String token) {
+        return extractClaim(token, claims -> (String) claims.get("authorities"));
+    }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
@@ -62,6 +64,7 @@ public class JwtService {
     private Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
+
 
     private Claims extractAllClaims(String token) {
         return Jwts.parser().setSigningKey(getSigningKey()).build().parseClaimsJws(token).getBody();

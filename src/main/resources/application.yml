@@ -5,13 +5,15 @@ spring:
     username: postgres
     password: admin
   jpa:
-    properties:
-      hibernate:
-        show_sql: false
-        ddl_auto: none
+    hibernate:
+      show-sql: true
+      ddl-auto: validate
+      sql: DEBUG
+      type: TRACE
   liquibase:
+    enabled: true
     change-log: classpath:db/changelog/changelog-master.yml
 
 jwt:
-  secret: slowdive
+  secret: slowdiveslowdiveslowdiveslowdiveslowdiveslowdiveslowdiveslowdiveslowdiveslowdiveslowdiveslowdiveslowdive
   expirationMs: 360000
