@@ -23,13 +23,8 @@ public class AuthenticationController {
 
     @PostMapping("/auth/login")
     public AuthResponse authenticate(@RequestBody @Valid AuthRequest request) {
-        System.out.println("Request в контроллере " + request);
         return authenticationService.auth(request);
     }
 
-    @GetMapping("/users") // only for admin
-    public List<User> allUsers() {
-        return userRepository.findAll();
-    }
 
 }

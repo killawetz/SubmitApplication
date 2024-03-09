@@ -35,7 +35,6 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         // Enable CORS and disable CSRF
         http.csrf(AbstractHttpConfigurer::disable)
-                // Своего рода отключение CORS (разрешение запросов со всех доменов)
                 .cors(cors -> cors.configurationSource(request -> {
                     var corsConfiguration = new CorsConfiguration();
                     corsConfiguration.setAllowedOriginPatterns(List.of("*"));
@@ -46,14 +45,15 @@ public class WebSecurityConfig {
                 }))
         // Set permissions on endpoints
         .authorizeRequests(request -> request
-                        .requestMatchers("/users").permitAll()
+                        .requestMatchers("/user/**").hasRole("user")
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("admin")
-                        .requestMatchers("/manage/**").hasAnyRole("operator", "admin")
+                        .requestMatchers("/op/**").hasRole("operator")
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider())
-                .addFilterBefore(authJwtFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(authJwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .logout((logout) -> logout.logoutUrl("/my/logout").permitAll());
         return http.build();
     }
 

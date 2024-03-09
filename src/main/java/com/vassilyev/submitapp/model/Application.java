@@ -38,7 +38,8 @@ public class Application {
     @JoinColumn(name = "status_id")
     private Status status;
 
-    @JsonBackReference
+    @JsonManagedReference
+    //@ToString.Exclude
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;

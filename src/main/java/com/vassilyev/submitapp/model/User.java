@@ -42,7 +42,8 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
 
-    @JsonManagedReference
+    @JsonBackReference
+    //@ToString.Exclude
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<Application> application;
 
